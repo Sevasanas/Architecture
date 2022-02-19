@@ -97,7 +97,6 @@ class MySQLDbConnection implements DbConnection
         $hostname="your_hostname";
         $username="your_dbusername";
         $password="your_dbpassword";
-        $dbname="your_dbusername";
         mysqli_connect($hostname,$username, $password) or die ("html>script language='JavaScript'>alert('Не удается подключиться к базе данных. Повторите попытку позже.'),history.go(-1)/script>/html>");
     }
 }
@@ -110,7 +109,6 @@ class PostgreDbConnection implements DbConnection
         $hostname="your_hostname";
         $username="your_dbusername";
         $password="your_dbpassword";
-        $dbname="your_dbusername";
         pg_connect($hostname,$username, $password) or die ("html>script language='JavaScript'>alert('Не удается подключиться к базе данных. Повторите попытку позже.'),history.go(-1)/script>/html>");
     }
 }
@@ -123,7 +121,6 @@ class OracleDbConnection implements DbConnection
         $hostname="your_hostname";
         $username="your_dbusername";
         $password="your_dbpassword";
-        $dbname="your_dbusername";
         OCILogon($hostname,$username, $password) or die ("html>script language='JavaScript'>alert('Не удается подключиться к базе данных. Повторите попытку позже.'),history.go(-1)/script>/html>");
     }
 }
@@ -142,8 +139,7 @@ class MySQLDbRecrord implements DbRecrord
 {
     public function getDbRecrord(): string
     {
-        return
-            $sql = "CREATE TABLE tbl_name (id INTEGER AUTO_INCREMENT PRIMARY KEY, name VARCHAR(30), age INTEGER)";
+        return "CREATE TABLE tbl_name (id INTEGER AUTO_INCREMENT PRIMARY KEY, name VARCHAR(30), age INTEGER)";
     }
 }
 
@@ -151,8 +147,7 @@ class PostgreDbRecrord implements DbRecrord
 {
     public function getDbRecrord(): string
     {
-        return
-            $sql = "CREATE TABLE tbl_name (id INTEGER AUTO_INCREMENT PRIMARY KEY, name VARCHAR(30), age INTEGER)";
+        return "CREATE TABLE tbl_name (id INTEGER AUTO_INCREMENT PRIMARY KEY, name VARCHAR(30), age INTEGER)";
     }
 }
 
@@ -160,8 +155,7 @@ class OracleDbRecrord implements DbRecrord
 {
     public function getDbRecrord(): string
     {
-        return
-            $sql = "CREATE TABLE tbl_name (id INTEGER AUTO_INCREMENT PRIMARY KEY, name VARCHAR(30), age INTEGER)";
+        return "CREATE TABLE tbl_name (id INTEGER AUTO_INCREMENT PRIMARY KEY, name VARCHAR(30), age INTEGER)";
     }
 }
 
@@ -179,8 +173,7 @@ class MySQLDbQueryBuiler implements DbQueryBuiler
 {
     public function getDbQueryBuiler(): string
     {
-        return 
-            $sql = "SELECT * FROM tbl_name";
+        return  "SELECT * FROM tbl_name";
     }
 }
 
@@ -188,8 +181,7 @@ class PostgreDbQueryBuiler implements DbQueryBuiler
 {
     public function getDbQueryBuiler(): string
     {
-        return 
-            $sql = "SELECT * FROM tbl_name";
+        return  "SELECT * FROM tbl_name";
     }
 }
 
@@ -197,8 +189,7 @@ class OracleDbQueryBuiler implements DbQueryBuiler
 {
     public function getDbQueryBuiler(): string
     {
-        return 
-            $sql = "SELECT * FROM tbl_name";
+        return "SELECT * FROM tbl_name";
     }
 }
 
@@ -212,7 +203,18 @@ function clientCode(DbFactory $factory)
     echo $dataDbRecrord->getDbRecrord() . "\n";
     echo $dataDbQueryBuiler->getDbQueryBuiler() . "\n";
 }
+echo "Client: Testing client code with the first factory type:\n";
+clientCode(new MySQLConnection());
 
+echo "\n";
+
+echo "Client: Testing the same client code with the second factory type:\n";
+clientCode(new PostgreConnection());
+
+echo "\n";
+
+echo "Client: Testing the same client code with the second factory type:\n";
+clientCode(new OracleConnection());
 
 
 
