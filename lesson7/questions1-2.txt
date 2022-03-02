@@ -1,0 +1,9 @@
+1. Front Controller находится в web/index.php.
+Взаимодействует с классами:
+1. Создаётся объект класса Request, который содержит параметры запроса. Он применяется в:
+src/Controller/UserController.php
+src/Controller/OrderController.php
+src/Controller/ProductController.php
+2.Создаётся контейнер внедрения зависимостей ContainerBuilder и передаётся в реестр
+app/kernel.php
+
