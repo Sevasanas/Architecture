@@ -8,6 +8,21 @@ use Model\Entity;
 
 class Product
 {
+    private $identityMap = [];
+
+    public function add($productList $ids )
+    {
+        $productList = [];
+        foreach ($this->getDataFromSource() as $item) {
+            $productList[] = new Entity\Product($item['id'], $item['name'], $item['price']);
+        }
+
+        $this->identityMap[$ids] = $productList; 
+        
+        // return $productList;
+    }
+
+
     /**
      * Поиск продуктов по массиву id
      *
@@ -22,7 +37,7 @@ class Product
 
         $productList = [];
         foreach ($this->getDataFromSource(['id' => $ids]) as $item) {
-            $productList[] = new Entity\Product($item['id'], $item['name'], $item['price']);
+            $productList[] = $identityMap[$ids];
         }
 
         return $productList;
@@ -37,7 +52,7 @@ class Product
     {
         $productList = [];
         foreach ($this->getDataFromSource() as $item) {
-            $productList[] = new Entity\Product($item['id'], $item['name'], $item['price']);
+            $productList[] = $isentityMap[$ids]);
         }
 
         return $productList;
